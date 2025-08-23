@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { ORM } from '../interfaces/ORM';
 import { Character } from './models/Character';
 import { Comment } from './models/Comment';
+import { env } from '@infrastructure/libs/dotenv';
 
 export class SequelizeORM implements ORM {
     private sequelize: Sequelize;
@@ -9,11 +10,11 @@ export class SequelizeORM implements ORM {
     constructor() {
         this.sequelize = new Sequelize({
             dialect: 'postgres',
-            host: 'localhost',
+            host: env.dbHost,
             port: 5432,
-            username: 'postgres',
-            password: 'password',
-            database: 'rick_and_morty_db',
+            username: env.dbUser,
+            password: env.dbPassword,
+            database: env.dbName,
             pool: {
                 max: 5,
                 min: 0,
