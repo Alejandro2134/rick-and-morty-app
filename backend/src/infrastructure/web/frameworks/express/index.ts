@@ -5,10 +5,13 @@ import { GraphQLSchema } from 'graphql';
 import { expressMiddleware } from '@as-integrations/express5';
 import { ApolloServer } from '@apollo/server';
 import http from 'http';
+import { Container } from 'typedi';
 
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { WebFramework } from '@infrastructure/web/interfaces/WebFramework';
 import { CharacterResolver } from '@infrastructure/web/frameworks/graphql/resolvers/CharacterResolver';
+import { LoggingMiddleware } from '@infrastructure/web/frameworks/express/middlewares/LoggingMiddleware';
+import { CommentResolver } from '../graphql/resolvers/CommentResolver';
 
 export class Express implements WebFramework {
     private app: express.Application;
@@ -21,16 +24,22 @@ export class Express implements WebFramework {
     }
 
     private setUpRoutes() {
-        this.app.use('/graphql', expressMiddleware(this.apolloServer));
+        this.app.use(
+            '/graphql',
+            express.json(),
+            expressMiddleware(this.apolloServer),
+        );
     }
 
     private async setUpGraphQLSchema() {
         return await buildSchema({
-            resolvers: [CharacterResolver],
+            resolvers: [CharacterResolver, CommentResolver],
             emitSchemaFile: path.resolve(
                 __dirname,
                 '../graphql/schema.graphql',
             ),
+            container: Container,
+            globalMiddlewares: [LoggingMiddleware],
         });
     }
 
