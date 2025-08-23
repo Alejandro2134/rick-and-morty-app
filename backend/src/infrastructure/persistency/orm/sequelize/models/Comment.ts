@@ -5,10 +5,16 @@ import {
     DataType,
     ForeignKey,
     Model,
+    UpdatedAt,
 } from 'sequelize-typescript';
 import { Character } from './Character';
 
-@Table({ tableName: 'comments' })
+export interface ICommentModel {
+    character_id: number;
+    content: string;
+}
+
+@Table({ tableName: 'comments', timestamps: false })
 export class Comment extends Model {
     @Column({ primaryKey: true, autoIncrement: true, allowNull: false })
     declare comment_id: number;

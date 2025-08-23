@@ -2,10 +2,23 @@ import {
     Column,
     CreatedAt,
     DeletedAt,
+    HasMany,
     Model,
     Table,
     UpdatedAt,
 } from 'sequelize-typescript';
+import { Comment } from './Comment';
+
+export interface ICharacterModel {
+    character_id?: number;
+    status: string;
+    species: string;
+    gender: string;
+    name: string;
+    origin: string;
+    external_id: number;
+    is_favorite: boolean;
+}
 
 @Table({ tableName: 'characters', paranoid: true })
 export class Character extends Model {
@@ -30,6 +43,12 @@ export class Character extends Model {
     @Column({ allowNull: false })
     declare image: string;
 
+    @Column({ allowNull: false, unique: true })
+    declare external_id: number;
+
+    @Column({ allowNull: false, defaultValue: false })
+    declare is_favorite: boolean;
+
     @CreatedAt
     declare created_at: Date;
 
@@ -38,4 +57,7 @@ export class Character extends Model {
 
     @DeletedAt
     declare deleted_at: Date | null;
+
+    @HasMany(() => Comment)
+    declare comments: Comment[];
 }
