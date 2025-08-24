@@ -6,6 +6,7 @@ import { expressMiddleware } from '@as-integrations/express5';
 import { ApolloServer } from '@apollo/server';
 import http from 'http';
 import { Container } from 'typedi';
+import cors from 'cors';
 
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { WebFramework } from '@infrastructure/web/interfaces/WebFramework';
@@ -26,6 +27,7 @@ export class Express implements WebFramework {
     private setUpRoutes() {
         this.app.use(
             '/graphql',
+            cors<cors.CorsRequest>(),
             express.json(),
             expressMiddleware(this.apolloServer),
         );
