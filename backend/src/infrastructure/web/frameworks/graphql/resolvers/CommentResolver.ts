@@ -4,6 +4,7 @@ import { Comment, CommentCreate } from '../types/Comment';
 import { CommentMapper } from '@application/mappers/CommentMapper';
 import { CreateComment } from '@application/use_cases/comment/CreateComment';
 import { CommentRepoImpl } from '@infrastructure/persistency/orm/sequelize/implementations/CommentRepoImpl';
+import { CharacterCacheRepoImpl } from '@infrastructure/persistency/cache/redis/implementations/CharacterCacheRepoImpl';
 
 @Service()
 @Resolver()
@@ -11,8 +12,14 @@ export class CommentResolver {
     private readonly commentMapper = new CommentMapper();
     private readonly createComment: CreateComment;
 
-    constructor(private readonly commentRepoImpl: CommentRepoImpl) {
-        this.createComment = new CreateComment(commentRepoImpl);
+    constructor(
+        private readonly commentRepoImpl: CommentRepoImpl,
+        private readonly characterCacheRepoImpl: CharacterCacheRepoImpl,
+    ) {
+        this.createComment = new CreateComment(
+            commentRepoImpl,
+            characterCacheRepoImpl,
+        );
     }
 
     @Mutation((_returns) => Comment)
