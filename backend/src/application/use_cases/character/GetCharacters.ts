@@ -20,11 +20,10 @@ export class GetCharacters {
 
         if (!cachedCharacters) {
             const characters = await this.characterRepository.getAll(filters);
-            console.log(characters);
             this.characterCacheRepository.setCharacterList(
                 hash,
                 characters,
-                300,
+                120,
             );
 
             return characters;
