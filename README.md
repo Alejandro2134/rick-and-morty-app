@@ -4,6 +4,9 @@ Full-stack application that consumes characters from the Rick and Morty public A
 
 ## Database ER Diagram
 
+<img width="541" height="361" alt="er drawio" src="https://github.com/user-attachments/assets/18b17a01-6f54-4ee4-8fff-c8dd54248408" />
+
+
 ## Required Technologies
 
 You need to have all of this technologies up and running in your computer to run the project:
@@ -30,7 +33,9 @@ You need to have all of this technologies up and running in your computer to run
   ```
 - Run database migrations `npm run db:migrate`
 - Run the app in development mode: `npm run dev` this will initialize the db with characters taken from the Rick and Morty API
-- Navigate to http://localhost:3000/graphql you should see a sandbox server for graphql (where you can play with the available queries and mutations)
+- Navigate to http://localhost:3000/graphql you should see a sandbox server for graphql (where you can play with the available queries and mutations):
+  <img width="1510" height="940" alt="Captura de pantalla 2025-08-24 a la(s) 3 16 06 a  m" src="https://github.com/user-attachments/assets/32694b93-714e-48c6-ad39-1bb494c00142" />
+
 
 ### Frontend
 
@@ -43,6 +48,8 @@ You need to have all of this technologies up and running in your computer to run
   ```
 - Run the app in development mode: `npm run dev`
 - Navigate to http://localhost:5173 you should see the application
+  <img width="1918" height="892" alt="Captura de pantalla 2025-08-24 a la(s) 3 22 40 a  m" src="https://github.com/user-attachments/assets/22a7a8b9-1729-45ad-9c7e-d7a66d045e08" />
+
 
 ## How to use the API
 
