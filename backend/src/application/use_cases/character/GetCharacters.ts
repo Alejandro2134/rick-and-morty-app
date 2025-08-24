@@ -23,7 +23,7 @@ export class GetCharacters {
             this.characterCacheRepository.setCharacterList(
                 hash,
                 characters,
-                120,
+                10,
             );
 
             return characters;
